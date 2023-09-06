@@ -6,7 +6,7 @@
 </br>
 1. TopDownCharacterController.cs의 event에 등록해서 자동적으로 구현
 
-TopDownCharacterController의 event에 등록
+TopDownCameraMovement.cs => TopDownCharacterController의 event에 등록
 ```
 private void Awake()
 {
@@ -20,7 +20,7 @@ private void Start()
 }
 ```
 
-TopDownCharacterController에 Aim event 추가
+TopDownCharacterController.cs => Aim event 추가
 ```
 public event Func<bool,bool> OnAimEvent;
 public void CallAimEvent(bool input)
@@ -32,7 +32,7 @@ public void CallAimEvent(bool input)
 </br>
 2. 부드러운 화면 이동과 Aim 시에 이동 속도가 느려지는 것을 구현
 
-TopDownCameraMovement 부드러운 화면 이동
+TopDownCameraMovement.cs => 부드러운 화면 이동
 ```
 private void FixedUpdate()
 {
@@ -62,7 +62,7 @@ private void ApplyMovement(Vector2 direction)
 }
 ```
 
-PlayerInputController 속도 느려짐
+PlayerInputController.cs => 속도 느려짐
 ```
 public void OnMove(InputValue value)
 {
