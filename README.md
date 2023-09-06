@@ -1,9 +1,12 @@
 # 2DGatherGame
+![ezgif com-video-to-gif](https://github.com/Hwan007/2DGatherGame/assets/96556920/b74a2685-aad9-4847-8915-10f8119d8bda)
+
 #### 작성하면서 고려사항
 
 1. TopDownCharacterController.cs의 event에 등록해서 자동적으로 구현
+
+TopDownCharacterController의 event에 등록
 ```
-// TopDownCharacterController의 event에 등록
 private void Awake()
 {
   _controller = _player?.GetComponent<TopDownCharacterController>();
@@ -15,8 +18,9 @@ private void Start()
   _controller.OnLookEvent += Look;
 }
 ```
+
+TopDownCharacterController에 Aim event 추가
 ```
-// TopDownCharacterController에 Aim event 추가
 public event Func<bool,bool> OnAimEvent;
 public void CallAimEvent(bool input)
 {
@@ -24,8 +28,9 @@ public void CallAimEvent(bool input)
 }
 ```
 2. 부드러운 화면 이동과 Aim 시에 이동 속도가 느려지는 것을 구현
+
+TopDownCameraMovement 부드러운 화면 이동
 ```
-// TopDownCameraMovement 부드러운 화면 이동
 private void FixedUpdate()
 {
   ApplyMovement(_movementDirection);
@@ -53,8 +58,9 @@ private void ApplyMovement(Vector2 direction)
   }
 }
 ```
+
+PlayerInputController 속도 느려짐
 ```
-// PlayerInputController 속도 느려짐
 public void OnMove(InputValue value)
 {
   _moveInput = value.Get<Vector2>().normalized;
@@ -79,4 +85,4 @@ public void OnAim(InputValue value)
 }
 ```
 
-![ezgif com-video-to-gif](https://github.com/Hwan007/2DGatherGame/assets/96556920/b74a2685-aad9-4847-8915-10f8119d8bda)
+
