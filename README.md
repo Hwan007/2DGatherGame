@@ -6,8 +6,7 @@
 </br>
 1. TopDownCharacterController.cs의 event에 등록해서 자동적으로 구현
 
-TopDownCameraMovement.cs => TopDownCharacterController의 event에 등록
-[https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Entities/TopDownCameraMovement.cs]
+[TopDownCameraMovement.cs](https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Entities/TopDownCameraMovement.cs) => TopDownCharacterController의 event에 등록
 ```
 private void Awake()
 {
@@ -22,8 +21,7 @@ private void Start()
 }
 ```
 
-TopDownCharacterController.cs => Aim event 추가
-[https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Controller/TopDownCharacterController.cs]
+[TopDownCharacterController.cs](https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Controller/TopDownCharacterController.cs) => Aim event 추가
 ```
 public event Func<bool,bool> OnAimEvent;
 
@@ -36,8 +34,7 @@ public void CallAimEvent(bool input)
 </br>
 2. 부드러운 화면 이동과 Aim 시에 이동 속도가 느려지는 것을 구현
 
-TopDownCameraMovement.cs => 부드러운 화면 이동
-[https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Entities/TopDownCameraMovement.cs]
+[TopDownCameraMovement.cs](https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Entities/TopDownCameraMovement.cs) => 부드러운 화면 이동
 ```
 private void FixedUpdate()
 {
@@ -69,8 +66,7 @@ private void ApplyMovement(Vector2 direction)
 }
 ```
 
-PlayerInputController.cs => 속도 느려짐
-[https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Controller/PlayerInputController.cs]
+[PlayerInputController.cs](https://github.com/Hwan007/2DGatherGame/blob/main/Assets/Scripts/Controller/PlayerInputController.cs) => 속도 느려짐
 ```
 public void OnMove(InputValue value)
 {
