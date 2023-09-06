@@ -10,22 +10,24 @@ TopDownCameraMovement.cs => TopDownCharacterController의 event에 등록
 ```
 private void Awake()
 {
-  _controller = _player?.GetComponent<TopDownCharacterController>();
+	_controller = _player?.GetComponent<TopDownCharacterController>();
 }
+
 private void Start()
 {
-  _controller.OnMoveEvent += Move;
-  _controller.OnAimEvent += Aim;
-  _controller.OnLookEvent += Look;
+	_controller.OnMoveEvent += Move;
+	_controller.OnAimEvent += Aim;
+	_controller.OnLookEvent += Look;
 }
 ```
 
 TopDownCharacterController.cs => Aim event 추가
 ```
 public event Func<bool,bool> OnAimEvent;
+
 public void CallAimEvent(bool input)
 {
-  OnAimEvent?.Invoke(input);
+	OnAimEvent?.Invoke(input);
 }
 ```
 
@@ -36,29 +38,31 @@ TopDownCameraMovement.cs => 부드러운 화면 이동
 ```
 private void FixedUpdate()
 {
-  ApplyMovement(_movementDirection);
+	ApplyMovement(_movementDirection);
 }
+
 public void Look(Vector2 direction)
 {
-  _offsetPosition = direction*4;
+	_offsetPosition = direction*4;
 }
+
 private void ApplyMovement(Vector2 direction)
 {
-  if (_isAim)
-    _targetPosition = (Vector2)_player.transform.position + _offsetPosition;
-  else
-    _targetPosition = (Vector2)_player.transform.position;
-  
-  if ((_targetPosition - transform.position).magnitude >= 0.1f)
-  {
-    float x = Mathf.Lerp(transform.position.x, _targetPosition.x, 0.3f);
-    float y = Mathf.Lerp(transform.position.y, _targetPosition.y, 0.3f);
-    transform.position = new Vector3(x, y, -10);
-  }
-  else
-  {
-    transform.position = new Vector3(_targetPosition.x, _targetPosition.y, -10);
-  }
+	if (_isAim)
+		_targetPosition = (Vector2)_player.transform.position + _offsetPosition;
+	else
+		_targetPosition = (Vector2)_player.transform.position;
+	
+	if ((_targetPosition - transform.position).magnitude >= 0.1f)
+	{
+		float x = Mathf.Lerp(transform.position.x, _targetPosition.x, 0.3f);
+		float y = Mathf.Lerp(transform.position.y, _targetPosition.y, 0.3f);
+		transform.position = new Vector3(x, y, -10);
+	}
+	else
+	{
+		transform.position = new Vector3(_targetPosition.x, _targetPosition.y, -10);
+	}
 }
 ```
 
@@ -66,25 +70,25 @@ PlayerInputController.cs => 속도 느려짐
 ```
 public void OnMove(InputValue value)
 {
-  _moveInput = value.Get<Vector2>().normalized;
-  if (IsAim)
-  {
-    CallMoveEvent(_moveInput / 2);
-  }
-  else
-    CallMoveEvent(_moveInput);
+	_moveInput = value.Get<Vector2>().normalized;
+	if (IsAim)
+	{
+		CallMoveEvent(_moveInput / 2);
+	}
+	else
+		CallMoveEvent(_moveInput);
 }
 
 public void OnAim(InputValue value)
 {
-  IsAim = value.isPressed;
-  CallAimEvent(IsAim);
-  if (IsAim)
-  {
-    CallMoveEvent(_moveInput/2);
-  }
-  else
-    CallMoveEvent(_moveInput);
+	IsAim = value.isPressed;
+	CallAimEvent(IsAim);
+	if (IsAim)
+	{
+		CallMoveEvent(_moveInput/2);
+	}
+	else
+		CallMoveEvent(_moveInput);
 }
 ```
 
