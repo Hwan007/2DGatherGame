@@ -5358,7 +5358,7 @@ MonoBehaviour:
   _baseData:
     statsChangeType: 2
     maxHealth: 100
-    speed: 10
+    speed: 5
     attackSO: {fileID: 11400000, guid: 1c282b51e89820f41a286474aff5d186, type: 2}
   dataModifiers: []
 --- !u!114 &713314797

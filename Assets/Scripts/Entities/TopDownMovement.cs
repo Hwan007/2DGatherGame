@@ -46,10 +46,13 @@ public class TopDownMovement : MonoBehaviour
     }
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * _stats.CurrentStats.speed;
         if (knockbackDuration > 0.0f)
         {
-            direction += _knockback;
+            direction = _knockback;
+        }
+        else
+        {
+            direction = direction * _stats.CurrentStats.speed;
         }
         _rigidbody.velocity = direction;
     }
