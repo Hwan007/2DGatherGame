@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class TopDownCharacterController : MonoBehaviour
@@ -9,14 +10,19 @@ public class TopDownCharacterController : MonoBehaviour
     // event 외부에서 호출하지 못하도록 막는다.
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
-    public event Action OnAttackEvent;
+    public event Action<AttackSO, bool> OnAttackEvent;
     public event Func<bool,bool> OnAimEvent;
 
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
     protected bool IsAim { get; set; }
-    protected bool IsOnAim { get; set; }
 
+    protected CharacterStatsHandler Stats { get; private set; }
+
+    protected virtual void Awake()
+    {
+        Stats = GetComponent<CharacterStatsHandler>();
+    }
     protected virtual void Update()
     {
         HandleAttackDelay();
@@ -24,14 +30,17 @@ public class TopDownCharacterController : MonoBehaviour
 
     private void HandleAttackDelay()
     {
-        if (_timeSinceLastAttack <= 0.2f)
+        if (Stats.CurrentStats.attackSO == null)
+            return;
+
+        if (_timeSinceLastAttack <= Stats.CurrentStats.attackSO.delay)
         {
             _timeSinceLastAttack += Time.deltaTime;
         }
         else if (IsAttacking)
         {
             _timeSinceLastAttack = 0;
-            CallAttackEvent();
+            CallAttackEvent(Stats.CurrentStats.attackSO, IsAim);
         }
     }
     public void CallMoveEvent(Vector2 direction)
@@ -42,9 +51,9 @@ public class TopDownCharacterController : MonoBehaviour
     {
         OnLookEvent?.Invoke(direction);
     }
-    public void CallAttackEvent()
+    public void CallAttackEvent(AttackSO attackSO, bool isAim)
     {
-        OnAttackEvent?.Invoke();
+        OnAttackEvent?.Invoke(attackSO, isAim);
     }
     public void CallAimEvent(bool input)
     {
