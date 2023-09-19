@@ -6408,7 +6408,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6757,7 +6757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  waveText: {fileID: 1558776182}
+  waveText: {fileID: 1303694721}
   hpGaugeSlider: {fileID: 984669134}
   gameOverUI: {fileID: 1759288312}
   currentWaveIndex: 0
