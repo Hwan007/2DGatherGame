@@ -7,13 +7,13 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    [SerializeField] private float soundEffectVolume;
-    [SerializeField] private float soundEffectPitchVariance;
-    [SerializeField] private float musicVolume;
+    [SerializeField][Range(0f, 1f)] private float soundEffectVolume;
+    [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance;
+    [SerializeField][Range(0f, 1f)] private float musicVolume;
     private ObjectPool objectPool;
 
     private AudioSource musicAudioSource;
-    private AudioClip musicClip;
+    [SerializeField] private AudioClip musicClip;
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
     {
         GameObject obj = Instance.objectPool.SpawnFromPool("SoundSource");
         obj.SetActive(true);
-        SoundSource soundSource = obj.GetComponent<AudioSource>();
+        SoundSource soundSource = obj.GetComponent<SoundSource>();
         soundSource.Play(clip, Instance.soundEffectVolume, Instance.soundEffectPitchVariance);
     }
 }
