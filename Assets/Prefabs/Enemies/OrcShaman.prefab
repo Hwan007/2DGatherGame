@@ -381,12 +381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9db568949691b46955d4a0a6c30363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseData:
+  baseStats:
     statsChangeType: 2
-    maxHealth: 8
-    speed: 3
+    maxHealth: 5
+    speed: 0
     attackSO: {fileID: 11400000, guid: 9215a64cddaa5384a83d4b0c3afc9ac9, type: 2}
-  dataModifiers: []
+  statsModifiers: []
 --- !u!114 &8346121483437000840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPostion: {fileID: 4162729526942077570}
+  shootingClip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
 --- !u!114 &30568001286932558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
+  damageClip: {fileID: 8300000, guid: b43d102aac6b145468dcaa94a5cccae1, type: 3}
 --- !u!114 &1939379059152946745
 MonoBehaviour:
   m_ObjectHideFlags: 0

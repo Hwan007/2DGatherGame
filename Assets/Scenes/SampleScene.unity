@@ -5632,12 +5632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9db568949691b46955d4a0a6c30363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseData:
+  baseStats:
     statsChangeType: 2
-    maxHealth: 100
-    speed: 5
+    maxHealth: 10
+    speed: 3
     attackSO: {fileID: 11400000, guid: 1c282b51e89820f41a286474aff5d186, type: 2}
-  dataModifiers: []
+  statsModifiers: []
 --- !u!114 &713314797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6766,6 +6766,10 @@ MonoBehaviour:
   - {fileID: 5005628621696638304, guid: 8d296d7776a22c4498c82b30c72b0d41, type: 3}
   - {fileID: 8691817317116990471, guid: db4d83b99bee6e24182fd96907a3c142, type: 3}
   spawnPositionsRoot: {fileID: 2045767145}
+  rewards:
+  - {fileID: 3850755006473914131, guid: e96f9f0777e953a43b1a89bf40e91b9a, type: 3}
+  - {fileID: 7825959116729241580, guid: b232b39d260352f438488e07345be9df, type: 3}
+  - {fileID: 2690079960768496806, guid: 40580bf2d8222bb4c9dcb8a80e29ccb4, type: 3}
 --- !u!1 &1303694719
 GameObject:
   m_ObjectHideFlags: 0
