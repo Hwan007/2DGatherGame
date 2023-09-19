@@ -7,13 +7,16 @@ public class TopDownShooting : MonoBehaviour
 {
     private TopDownCharacterController _controller;
     private ProjectileManager _projectileManager;
+
     [SerializeField] private Transform projectileSpawnPostion;
-    private CharacterStatsHandler _Stats;
     private Vector2 _lookDirection;
+    //private CharacterStatsHandler _Stats;
+
+    public AudioClip shootingClip;
     private void Awake()
     {
         _controller = GetComponent<TopDownCharacterController>();
-        _Stats = GetComponent<CharacterStatsHandler>();
+        //_Stats = GetComponent<CharacterStatsHandler>();
     }
     // Start is called before the first frame update
     void Start()
@@ -57,6 +60,8 @@ public class TopDownShooting : MonoBehaviour
             rangedAttackData
             );
         //Debug.Log("Attack");
+        if (shootingClip)
+            SoundManager.PlayClip(shootingClip);
     }
 
     private static Vector2 RotateVector2(Vector2 v, float degree)

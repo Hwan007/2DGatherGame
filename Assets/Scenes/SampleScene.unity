@@ -5374,6 +5374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPostion: {fileID: 422045403}
+  shootingClip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
 --- !u!114 &713314798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5399,6 +5400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
+  damageClip: {fileID: 8300000, guid: b43d102aac6b145468dcaa94a5cccae1, type: 3}
 --- !u!1 &743192479
 GameObject:
   m_ObjectHideFlags: 0
@@ -21561,7 +21563,7 @@ MonoBehaviour:
   soundEffectVolume: 0.3
   soundEffectPitchVariance: 0.2
   musicVolume: 0.1
-  musicClip: {fileID: 0}
+  musicClip: {fileID: 8300000, guid: 90eae78e8ce85a849b5b0ca11b2de641, type: 3}
 --- !u!82 &1946614660
 AudioSource:
   m_ObjectHideFlags: 0
