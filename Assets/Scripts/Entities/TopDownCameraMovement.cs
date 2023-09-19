@@ -13,7 +13,7 @@ public class TopDownCameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        _controller = _player?.GetComponent<TopDownCharacterController>();
+        _controller = _player.GetComponent<TopDownCharacterController>();
     }
 
     private void Start()
