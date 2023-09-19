@@ -25,11 +25,15 @@ public class GameManager : MonoBehaviour
 
     public float spawnInterval = .5f;
     public List<GameObject> enemyPrefebs = new List<GameObject>();
-    
+
     [SerializeField] private Transform spawnPositionsRoot;
     private List<Transform> spawnPositions = new List<Transform>();
 
     public List<GameObject> rewards = new List<GameObject>();
+
+    [SerializeField] private CharacterStats defaultStats;
+    [SerializeField] private CharacterStats rangedStats;
+
 
     private void Awake()
     {
@@ -51,10 +55,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UpgradeStatInit();
         StartCoroutine(StartNextWave());
     }
 
-    
+
 
     IEnumerator StartNextWave()
     {
@@ -64,6 +69,11 @@ public class GameManager : MonoBehaviour
             {
                 UpdateWaveUI();
                 yield return new WaitForSeconds(2f);
+
+                if (currentWaveIndex % 20 == 0)
+                {
+                    RandomUpgrade();
+                }
 
                 if (currentWaveIndex % 10 == 0)
                 {
@@ -90,7 +100,8 @@ public class GameManager : MonoBehaviour
                         int prefabIdx = Random.Range(0, enemyPrefebs.Count);
                         GameObject enemy = Instantiate(enemyPrefebs[prefabIdx], spawnPositions[posIdx].position, Quaternion.identity);
                         enemy.GetComponent<HealthSystem>().OnDeath += OnEnemyDeath;
-                        //enemy.GetComponent<CharacterStatsHandler>()
+                        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(defaultStats);
+                        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(rangedStats);
                         currentSpawnCount++;
                         yield return new WaitForSeconds(spawnInterval);
                     }
@@ -141,5 +152,50 @@ public class GameManager : MonoBehaviour
 
         GameObject obj = rewards[idx];
         Instantiate(obj, spawnPositions[posIdx].position, Quaternion.identity);
+    }
+
+    void UpgradeStatInit()
+    {
+        defaultStats.statsChangeType = eStatsChangeType.Add;
+        defaultStats.attackSO = Instantiate(defaultStats.attackSO);
+
+        rangedStats.statsChangeType = eStatsChangeType.Add;
+        rangedStats.attackSO = Instantiate(rangedStats.attackSO);
+    }
+
+    void RandomUpgrade()
+    {
+        switch (Random.Range(0, 6))
+        {
+            case 0:
+                defaultStats.maxHealth += 2;
+                break;
+
+            case 1:
+                defaultStats.attackSO.power += 1;
+                break;
+
+            case 2:
+                defaultStats.speed += 0.1f;
+                break;
+
+            case 3:
+                defaultStats.attackSO.isOnKnockback = true;
+                defaultStats.attackSO.knockbackPower += 1;
+                defaultStats.attackSO.knockbackTime += 0.1f;
+                break;
+
+            case 4:
+                defaultStats.attackSO.delay -= 0.5f;
+                break;
+
+            case 5:
+                RangedAttackData rangedAttackData = rangedStats.attackSO as RangedAttackData;
+                rangedAttackData.numberofProjectilesPerShot += 1;
+                break;
+
+            default:
+                break;
+        }
     }
 }
